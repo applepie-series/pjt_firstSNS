@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 5.0.0'
 gem 'jquery-rails', '~> 4.3'
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.4'
   gem 'byebug',  '9.0.6', platform: :mri
 end
 
