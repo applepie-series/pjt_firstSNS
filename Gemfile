@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+gem 'bcrypt', '3.1.12'
 gem 'bootstrap-sass'
 
 gem 'puma', '~> 4.1'
