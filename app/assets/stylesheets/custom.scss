@@ -1,10 +1,35 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+// header
 .navbar-fixed-top {
   height: 75px;
 }
 
 body {
   padding-top: 80px; 
+}
+
+// footer
+footer {
+  height: 60px;
+  background-color: #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// forms
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
 }
