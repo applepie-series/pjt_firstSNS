@@ -16,11 +16,11 @@ before_action :admin_user,     only: :destroy
   end
 
   def create
-    @user = User.new(user_params) 
+    @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "ユーザー登録に成功しました"
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "登録されたメールアドレスにメールを送りました。メールの内容を確認しアカウントを有効にしてください。"
+      redirect_to home_url
     else
       render 'new'
     end
