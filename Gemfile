@@ -5,6 +5,9 @@ ruby '2.6.5'
 
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'bcrypt', '3.1.12'
+gem 'faker',   '1.7.3'
+gem 'will_paginate',           '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass'
 
 gem 'puma', '~> 4.1'
