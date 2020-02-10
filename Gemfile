@@ -6,6 +6,8 @@ ruby '2.6.5'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'bcrypt', '3.1.12'
 gem 'faker',   '1.7.3'
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+gem 'mini_magick'
 gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass'
@@ -41,6 +43,7 @@ end
 
 group :production do
   gem 'mysql2', '>= 0.4.4'
+  gem 'fog'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
