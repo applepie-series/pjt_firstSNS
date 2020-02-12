@@ -1,6 +1,3 @@
-
-<script type="text/javascript">
-$(document).ready(function(){
-$("h1").css("color","green")
+$(document).on('turbolinks:load', function() {
+  $('#hana').css("color","red")
 });
-</script>

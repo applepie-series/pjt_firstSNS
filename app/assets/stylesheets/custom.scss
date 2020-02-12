@@ -5,9 +5,9 @@
   height: 75px;
 }
 
-body {
-  padding-top: 80px; 
-}
+// body {
+//   padding-top: 80px; 
+// }
 
 // footer
 footer {
@@ -60,13 +60,19 @@ footer {
   }
 }
 /* microposts */
+.micropost-container {
+  background-color: white;
+  border: solid 1px #dddddd;
+  box-shadow: 0px 0px 5px 1px rgba(185, 184, 184, 0.4);
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
 
 .microposts {
   list-style: none;
-  padding: 0;
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   .user {
     margin-top: 5em;
@@ -74,10 +80,16 @@ footer {
   }
   .content {
     display: block;
-    margin-left: 60px;
+    h2 {
+      border-top: solid 1px #bbbbbb;
+      font-size: 0.8em;
+      font-weight: normal;
+      padding: 10px;
+      margin: 0 auto;
+    }
     img {
       display: block;
-      padding: 5px 0;
+      width: 100%;
     }
   }
   .timestamp {
@@ -86,9 +98,7 @@ footer {
     margin-left: 60px;
   }
   .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
+    padding: 5px;
   }
 }
 
@@ -106,7 +116,6 @@ span.picture {
   }
 }
 .gravatar {
-  float: left;
   margin-right: 10px;
 }
 
@@ -119,6 +128,7 @@ span.picture {
   margin-top: 0;
   padding: 0;
   a {
+    font-size: 1em;
     float: left;
     padding: 0 10px;
     border-left: 1px solid $gray-lighter;
@@ -150,4 +160,9 @@ span.picture {
 
 .users.follow {
   padding: 0;
+}
+
+// サイドバーユーザー名のフォント
+.user_info h1{
+  font-size: 2em;
 }
