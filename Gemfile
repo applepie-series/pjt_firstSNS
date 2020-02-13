@@ -11,6 +11,7 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass'
 gem "aws-sdk-s3", require: false
+gem 'counter_culture'
 
 gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
