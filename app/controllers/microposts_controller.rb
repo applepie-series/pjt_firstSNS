@@ -11,11 +11,11 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to home_url
+      flash[:success] = "投稿が完了しました。"
+      redirect_back(fallback_location: root_path)
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'microposts/new'
+      render 'home'
     end
   end
 

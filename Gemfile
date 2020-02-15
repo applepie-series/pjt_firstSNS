@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'uglifier',  '~> 3.2'
 gem 'coffee-rails', '~> 5.0.0'
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'

@@ -1,0 +1,7 @@
+<% @comment = current_user.comments.build unless @comment %>
+<%= form_for [micropost, @comment] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.hidden_field :micropost_id, value: micropost.id %>
+  <%= f.text_area :content, placeholder: "コメントを書く..." %>
+  <%= f.submit '投稿する', class: "btn btn-default btn-xs" %>
+<% end %>

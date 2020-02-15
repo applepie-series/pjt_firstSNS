@@ -1,0 +1,8 @@
+<% micropost.comments.each do |c| %>
+  <div class="comment-username">
+    <%= c.user.name %>
+  </div>
+  <div class="comment-content">
+    <%= c.content %>
+  </div>
+<% end %>
