@@ -2,6 +2,8 @@
 
 one:
   user: one
+  room: one
 
 two:
   user: two
+  room: two

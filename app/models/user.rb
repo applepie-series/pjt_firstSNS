@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification",
                                  foreign_key: "visited_id",
                                  dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   before_save   :downcase_email
   before_create :create_activation_digest
