@@ -11,6 +11,23 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    # ダイレクトメッセージリンク
+    @currentUserEntry = Entrie.where(user_id: current_user.id)
+    @userEntry = Entrie.where(user_id: params[:id])
+    unless @user.id == current_user.id
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+    end
+    unless @isRoom
+      @room = Room.new
+      @entrie = Entrie.new
+    end
   end
 
   def new
@@ -49,14 +66,14 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Following"
+    @title = "フォロー"
     @user  = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "フォロワー"
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'

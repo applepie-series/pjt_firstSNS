@@ -1,6 +1,5 @@
-<h2>トーク</h2>
-<%= form_with model: @room do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<h4 class="rooms-title">メッセージ</h4>
+<%= form_with model: @message do |f| %>
+  <%= f.text_field :message, placeholder: "メッセージを書く..."  %>
   <%= f.submit %>
 <% end %>

@@ -13,7 +13,6 @@
   </span>
   <% if logged_in? %>
     <%= render "likes/like", micropost: micropost %>
-    <%= link_to "トーク", show_room_path %>
     <%= render "comments/comment", micropost: micropost%>
     <%= render "comments/form", micropost: micropost %>
   <% end %>

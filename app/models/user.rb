@@ -18,6 +18,7 @@ class User < ApplicationRecord
                                  foreign_key: "visited_id",
                                  dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   before_save   :downcase_email
   before_create :create_activation_digest
