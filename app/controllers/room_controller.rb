@@ -5,7 +5,7 @@ class RoomController < ApplicationController
     @room = Room.find(params[:id])
     if Entrie.where(user_id: current_user, room_id: @room.id).present?
       @messages = @room.messages
-      @massage = Message.new
+      @message = Message.new
       @entries = @room.entries
     else
       redirect_back(fallback_location: root_path)
