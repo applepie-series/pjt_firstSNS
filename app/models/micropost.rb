@@ -66,6 +66,10 @@ class Micropost < ApplicationRecord
     notification.save if notification.valid?
   end
 
+  def self.search(search)
+    where(['content LIKE ?', "%#{search}%"])
+  end
+
   private
     def images_size
       if images.size > 5.megabytes

@@ -1,0 +1,25 @@
+<div class="search">
+  <%= form_tag(home_path,:method => 'get') do %>
+    <%= text_field_tag :search, '', class: 'form-control search-form',id: 'search-form', placeholder: '投稿を検索...' %>
+    <%= submit_tag "\uf002", class: 'btn btn-default font-awesome-form', :name => nil %>
+  <% end %>
+</div>
+
+<%# <script>
+  $(document).on('turbolinks:load', function(){
+    $(document).on('keyup', '#search-form', function(e){
+      // フォームに入力された内容を取得
+      e.preventDefault();
+      var input = $.trim($(this).val());
+      // その内容をコントローラーに渡す
+      $.ajax({
+        url: '/search',
+        type: 'GET',
+        data: ('keyword=' + input),
+        processData: false,
+        contentType: false,
+        dataType: 'json'
+      })
+    })
+  }) 
+</script> %>

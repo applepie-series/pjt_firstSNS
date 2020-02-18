@@ -12,21 +12,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     # ダイレクトメッセージリンク
-    @currentUserEntry = Entrie.where(user_id: current_user.id)
-    @userEntry = Entrie.where(user_id: params[:id])
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id then
             @isRoom = true
-            @roomId = cu.room_id
+            @RoomPresent = Room.find(cu.room_id)
           end
         end
       end
     end
     unless @isRoom
       @room = Room.new
-      @entrie = Entrie.new
+      @entry = Entry.new
     end
   end
 
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました。"
       redirect_to @user
     else
       render 'edit'

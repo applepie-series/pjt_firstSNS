@@ -10,13 +10,13 @@
       <% unless @user.id == current_user.id %>
         <% if current_user.following?(@user) && @user.following?(current_user) %>
         <% if @isRoom == true %>
-          <p class="user-show-room"><%= link_to "メッセージを送る", @roomId, class: "btn btn-primary btn-lg" %>
+          <p class="user-show-room"><%= link_to "メッセージを送る", @RoomPresent, class: "btn btn-primary btn-lg" %>
         <% else %>
           <%= form_for @room do |f| %>
-            <%= fields_for @entrie do |e| %>
-              <%= e.hidden_field :user_id, value: @user.id %>
+            <%= fields_for @entry do |e| %>
+              <%= hidden_field_tag :user_id, @user.id %>
             <% end %>
-            <%= f.submit "メッセージを送る", class: "btn btn-primary btn-lg user-show-chat" %>
+            <%= f.submit "メッセージを送る", class: "btn btn-primary btn-md user-show-chat" %>
           <% end %>
         <% end %>
         <% end %>

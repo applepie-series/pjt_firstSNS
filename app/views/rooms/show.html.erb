@@ -2,7 +2,7 @@
 <% @entries.each do |e| %>
   <div class="room-user">
     <strong>
-      <%= image_tag gravatar_for(e.user, size: 30) %>
+      <%= gravatar_for(e.user, size: 30) %>
       <%= link_to e.user.name, e.user, class: "room-user-name" %>さん
     </strong>
   </div>
@@ -25,8 +25,9 @@
     <% end %>
   </div>
   <div class="chat-form">
-    <%= form_with model: @message do |f| %>
-      <%= f.text_field :message, placeholder: "メッセージを書く...", size: 70, class: "form-text-field"  %>
+    <%= form_for @message do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_field :content, placeholder: "メッセージを書く...", size: 90, class: "form-text-field"  %>
       <%= f.hidden_field :room_id, value: @room.id %>
       <%= f.submit "送信", class: "form-submit" %>
     <% end %>
