@@ -1,26 +1,88 @@
-<li class="col-md-5 micropost-container" id="micropost-<%= micropost.id %>">
-  <%= link_to gravatar_for(micropost.user, size: 35), micropost.user %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-  <span class="content">
-    <h2><%= micropost.content %></h2>
-    <% if micropost.images.attached? %>
-      <% micropost.images.each do |image| %>
-        <%= link_to image, 'data-lightbox': image do%>
-          <%= image_tag image.variant(combine_options:{resize:"300x300^",crop:"300x300+0+0",gravity: :center}).processed %>
-        <%end%>
-      <%end%>
-    <% end %>
-  </span>
-  <% if logged_in? %>
-    <%= render "likes/like", micropost: micropost %>
-    <%= render "comments/comment", micropost: micropost%>
-    <%= render "comments/form", micropost: micropost %>
-  <% end %>
-  <span class="timestamp">
-    <%= time_ago_in_words(micropost.created_at) %> 前に投稿
-    <% if current_user?(micropost.user) %>
-      <%= link_to "削除", micropost, method: :delete,
-                                      data: { confirm: "投稿を削除します。よろしいですか？" } %>
-    <% end %>
-  </span>
-</li>
+<div class="col-md-6">
+  <li class="micropost-container" id="micropost-<%= micropost.id %>">
+    <div class="micropost_user-name">
+      <%= link_to gravatar_for(micropost.user, size: 35), @user %>
+      <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+    </div>
+    <div class="micropost-content_container">
+      <span class="content Card">
+        <div class="Card-Item">
+          <div class="Card-Item-Comment">
+            <div class="Card-Item-Comment-Text">
+              <%= link_to micropost.content, micropost %>
+            </div>
+          </div>
+        </div>
+        <% if micropost.image.attached? %>
+          <%= link_to micropost.image, 'data-lightbox': image do%>
+            <%= image_tag image.variant(combine_options:{resize:"300x300^", auto_orient: true,crop:"300x300+0+0",gravity: :center}).processed %>
+          <%end%>
+        <% end %>
+      </span>
+    </div>
+    <div class="comment_container">
+      <% if logged_in? %>
+        <%= render "likes/like", micropost: micropost %>
+        <% @comments = micropost.comments %>
+        <% if @comments.any? %>
+          <% if @comments.count > 3%>
+            <% @threecomments = micropost.comments.first(3) %>
+            <%= render @threecomments %>
+            <%= link_to "...続きを読む", micropost %>
+          <% else %>
+            <%= render @comments%>
+          <% end %>
+        <% end %>
+        <%= render "comments/form", micropost: micropost %>
+      <% end %>
+    </div>
+    <span class="timestamp">
+      <%= time_ago_in_words(micropost.created_at) %> 前に投稿
+      <% if current_user?(micropost.user) %>
+        <%= link_to "削除", micropost, method: :delete,
+                                        data: { confirm: "投稿を削除します。よろしいですか？" } %>
+      <% end %>
+    </span>
+  </li>
+</div>
+<script>
+$('.Card-Item-Comment-Text').each(function(e){
+
+  let $comment = $(this);
+  // 元の文章を変数に格納
+  let comment = $comment.html();
+  let length = comment.length;
+  let commentShow;
+  let commentText;
+  if($comment.height() > 50){
+    // 文章の要素の高さが100を超えていたら隠す用のisHiddenクラスを付与
+    $comment.addClass('isHidden');
+    
+    // ウィンドウ幅が768px以上の時の処理（PC表示）
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 86);
+      commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
+      $comment.html(commentText);
+    } else { // ウィンドウ幅が768px以下の時の処理（スマホ表示）
+      commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 68);
+      commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
+      $comment.html(commentText);
+    }
+    // 続きを読むをクリックで元の文章を表示
+    $comment.on('click', '.Card-Item-Comment-Text-More', function(e){
+      let $anchor = $(e.currentTarget);
+      let $anchorParent = $anchor.parent();
+      $anchorParent.removeClass('isHidden');
+      $anchorParent.html(''); // 一旦空にする
+      $anchorParent.html(comment).append('<span class="Card-Item-Comment-Text-Hide">' + '閉じる' + '</span>');
+      // 閉じるをクリックで元に戻す
+      $('.Card-Item-Comment-Text-Hide').on('click', function(e){
+        let $anchorHide = $(e.currentTarget).parent();
+        $anchorHide.addClass('isHidden');
+        $anchorHide.html('');
+        $anchorHide.html(commentText);
+      });
+    });
+  }
+  });
+</script>

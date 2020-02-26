@@ -19,4 +19,19 @@ class RelationshipsController < ApplicationController
       format.js
     end
   end
+
+  private 
+
+    # フォロー通知の作成
+    def create_notification_follow!(current_user)
+      temp = Notification.where("visitor_id = ?", current_user.id ).where("action IN (?) AND visited_id = ?", "follow", @user.id )
+      if temp.blank?
+        notification = Notification.new(
+          visitor_id: current_user.id,
+          visited_id: @user.id,
+          action: "follow"
+        )
+        notification.save if notification.valid?
+      end
+    end
 end

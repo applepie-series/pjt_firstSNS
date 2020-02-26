@@ -18,4 +18,17 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:content, :user_id, :micropost_id)
     end
+
+    def create_notification_comment!(current_user, comment_id, micropost)
+      notification = current_user.active_notifications.new(
+        micropost_id: micropost.id,
+        visited_id: micropost.user_id,
+        comment_id: comment_id,
+        action: 'comment'
+      )
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
 end

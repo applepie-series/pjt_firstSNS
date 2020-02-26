@@ -1,0 +1,47 @@
+<div class="row micropost-show_container">
+  <div class="col-md-2 col-md-offset-1">
+    <aside class="user_info-container">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+    </aside>
+  </div>
+  <div class="col-md-6 micropost-container">
+    <div class="micropost_user-name">
+      <%= link_to gravatar_for(@user, size: 35), @user %>
+      <span class="user"><%= link_to @user.name, @user %></span>
+    </div>
+    <div class="micropost-content_container">
+      <div class="micropost-content micropost_show-content">
+        <%= @micropost.content %>
+      </div>
+      <% if @micropost.images.attached? %>
+        <% @micropost.images.each do |image| %>
+          <%= link_to image, 'data-lightbox': image do%>
+            <%= image_tag image.variant(combine_options:{resize:"500x500^", auto_orient: true,crop:"500x500+0+0",gravity: :center}).processed %>
+          <%end%>
+        <%end%>
+      <% end %>
+    </div>
+    <div class="comment_container">
+      <% if logged_in? %>
+        <%= render "likes/like", micropost: @micropost %>
+        <% @comments = @micropost.comments%>
+        <% if @comments.any? %>
+          <%= render @comments%>
+        <% end %>
+        <%= render "comments/form", micropost: @micropost %>
+      <% end %>
+    </div>
+    <span class="timestamp">
+      <%= time_ago_in_words(@micropost.created_at) %> 前に投稿
+      <% if current_user?(@user) %>
+        <%= link_to "削除", @micropost, method: :delete,
+                                        data: { confirm: "投稿を削除します。よろしいですか？" } %>
+      <% end %>
+    </span>
+  </div>
+</div>

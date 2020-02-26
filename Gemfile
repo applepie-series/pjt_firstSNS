@@ -7,11 +7,11 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'bcrypt', '3.1.12'
 gem 'faker',   '1.7.3'
 gem 'image_processing', '~> 1.2'
-gem 'will_paginate',           '3.1.7'
-gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass'
 gem "aws-sdk-s3", require: false
 gem 'counter_culture'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
@@ -22,6 +22,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'uglifier',  '~> 3.2'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'rails-i18n'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
@@ -33,6 +34,7 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
 end
 
 group :test do

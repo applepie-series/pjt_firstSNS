@@ -103,16 +103,10 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-  # フォロー通知の作成
-  def create_notification_follow!(current_user)
-    temp = Notification.where("visitor_id = ? visited_id = ? action = ? ", current_user.id, id, 'follow' )
-    if temp.blank?
-      notification = current_user.notification.new(
-        visited_id: id,
-        action: 'follow'
-      )
-    end
-    notification.save if notification.valid?
+
+  # ユーザー検索メソッド
+  def self.search(search)
+    where(['name LIKE ?', "%#{search}%"])
   end
 
   private

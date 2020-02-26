@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+
   def home
     if logged_in?
       @micropost  = current_user.microposts.build
@@ -8,6 +9,8 @@ class StaticPagesController < ApplicationController
       else
         @feed_items = current_user.feed.paginate(page: params[:page])
       end
+    else
+      redirect_to(root_url)
     end
   end
 
@@ -18,5 +21,9 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
+  end
+
+  def runding
+    
   end
 end

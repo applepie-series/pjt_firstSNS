@@ -1,11 +1,16 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy, :new]
   before_action :correct_user,   only: :destroy
 
   def new
     if logged_in?
       @micropost  = current_user.microposts.build
     end
+  end
+
+  def show
+    @micropost = Micropost.find(params[:id])
+    @user = @micropost.user
   end
 
   def create
@@ -15,7 +20,8 @@ class MicropostsController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'home'
+      @micropost = current_user.microposts.build(micropost_params)
+      render "new"
     end
   end
 
@@ -28,7 +34,7 @@ class MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content, images: [])
+      params.require(:micropost).permit(:content, :image)
     end
 
     def correct_user

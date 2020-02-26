@@ -1,7 +1,15 @@
 <% @comment = current_user.comments.build unless @comment %>
-<%= form_for [micropost, @comment] do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.hidden_field :micropost_id, value: micropost.id %>
-  <%= f.text_area :content, placeholder: "コメントを書く..." %>
-  <%= f.submit '投稿する', class: "btn btn-default btn-xs" %>
-<% end %>
+<div class="comment-contaier">
+  <%= form_for [micropost, @comment] do |f| %>
+    <div class="form-group">
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.hidden_field :micropost_id, value: micropost.id %>
+      <div class="col-xs-12 col-md-10">
+        <%= f.text_field :content, placeholder: "コメントを書く...", class: "form-control" %>
+      </div>
+      <div class="col-md-2 col-xs-12">
+        <%= f.submit '投稿', class: "btn btn-default " %>
+      </div>
+    </div>
+  <% end %>
+</div>

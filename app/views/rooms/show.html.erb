@@ -14,10 +14,10 @@
       <% @messages.each do |m| %>
         <div class="chat-box">
           <div class="chat-face">
-            <%= image_tag gravatar_for(m.user, size: 30) %>
+            <%= gravatar_for(m.user, size: 30) %>
           </div>
           <div class="chat-hukidashi">
-            <strong><%= m.message%></strong>
+            <strong><%= m.content%></strong>
             <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
           </div>
         </div>
@@ -26,7 +26,6 @@
   </div>
   <div class="chat-form">
     <%= form_for @message do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
       <%= f.text_field :content, placeholder: "メッセージを書く...", size: 90, class: "form-text-field"  %>
       <%= f.hidden_field :room_id, value: @room.id %>
       <%= f.submit "送信", class: "form-submit" %>

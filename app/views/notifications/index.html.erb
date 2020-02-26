@@ -1,5 +1,5 @@
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-<div class="row">
+<div class="row notification-container">
   <% if notifications.present? %>
     <%= render notifications %>
     <%= will_paginate notifications %>

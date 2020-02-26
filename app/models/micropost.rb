@@ -3,8 +3,8 @@ class Micropost < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
-  validate :images_size
-  has_many_attached :images
+  validate :image_size
+  has_one_attached :image
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
@@ -13,7 +13,7 @@ class Micropost < ApplicationRecord
 
   def like(user)
     likes.create(user_id: user.id)
-    create_notification_like!(current_user)
+    create_notification_like!(user)
   end
 
   def unlike(user)
@@ -32,9 +32,9 @@ class Micropost < ApplicationRecord
     # いいねされてなければ通知を作成
     if temp.blank?
       notification = current_user.active_notifications.new(
-        micropost_id = id,
-        visited_id = user_id,
-        action = "like"
+        micropost_id: id,
+        visited_id: user_id,
+        action: "like"
       )
       # ユーザーが自分自身に良いねをした場合通知は送らない
       if notification.visitor_id == notification.visited_id
@@ -44,36 +44,14 @@ class Micropost < ApplicationRecord
     end
   end
 
-  # 投稿コメントの通知を作成
-  # def create_notification_comment!(current_user, comment_id)
-  #   # 自分以外のコメントしているユーザーを全て取得
-  #   temp_ids = Comment.select(:user_id).where(micropost_id: id).where.not(user_id: current_user.id).distinct
-  #   temp_ids.each do |temp_id|
-  #     save_notification_comment!(current_user, comment_id, temp_id['user_id'])
-  #   end
-  # end
-
-  def create_notification_comment!(current_user, comment_id, micropost)
-    notification = current_user.active_notifications.new(
-      micropost_id = id,
-      visited_id: micropost.user_id,
-      comment_id: comment_id,
-      action: comment
-    )
-    if notification.visitor_id == notification.visited_id
-      notification.checked = true
-    end
-    notification.save if notification.valid?
-  end
-
   def self.search(search)
     where(['content LIKE ?', "%#{search}%"])
   end
 
   private
-    def images_size
-      if images.size > 5.megabytes
-        errors.add(:images, "5MB以下の画像を選択してください")
+    def image_size
+      if image.attached? && image.size > 5.megabytes
+        errors.add(:image, "5MB以下の画像を選択してください")
       end
     end
 end

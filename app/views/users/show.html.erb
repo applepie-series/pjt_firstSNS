@@ -6,6 +6,9 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <div class="follow_button_container">
+        <%= render 'follow_form' if logged_in? %>
+      </div>
       <%# 相互フォローの場合のみトークリンク表示 %>
       <% unless @user.id == current_user.id %>
         <% if current_user.following?(@user) && @user.following?(current_user) %>
@@ -14,7 +17,7 @@
         <% else %>
           <%= form_for @room do |f| %>
             <%= fields_for @entry do |e| %>
-              <%= hidden_field_tag :user_id, @user.id %>
+              <%= e.hidden_field :user_id, value: @user.id %>
             <% end %>
             <%= f.submit "メッセージを送る", class: "btn btn-primary btn-md user-show-chat" %>
           <% end %>
@@ -27,7 +30,6 @@
     </section>
   </aside>
   <div class="col-md-10 row">
-    <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3><%= @user.name %>の投稿 (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">

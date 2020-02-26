@@ -167,6 +167,8 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.2.1)
@@ -261,7 +263,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    will_paginate (3.1.7)
+    will_paginate (3.2.1)
     zeitwerk (2.2.2)
 
 PLATFORMS
@@ -272,7 +274,7 @@ DEPENDENCIES
   bcrypt (= 3.1.12)
   bootsnap (>= 1.4.2)
   bootstrap-sass
-  bootstrap-will_paginate (= 1.0.0)
+  bootstrap-will_paginate
   byebug (= 9.0.6)
   coffee-rails (~> 5.0.0)
   counter_culture
@@ -282,9 +284,11 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (= 3.1.5)
+  mini_magick
   minitest (= 5.13.0)
   minitest-reporters (= 1.1.14)
   mysql2 (>= 0.4.4)
+  pry-rails
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   rails-controller-testing (= 1.0.4)
@@ -298,7 +302,7 @@ DEPENDENCIES
   uglifier (~> 3.2)
   web-console (= 3.5.1)
   webpacker (~> 4.0)
-  will_paginate (= 3.1.7)
+  will_paginate
 
 RUBY VERSION
    ruby 2.6.5p114
