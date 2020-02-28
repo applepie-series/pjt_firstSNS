@@ -110,7 +110,7 @@ class UsersController < ApplicationController
   end
 
   def modal
-    
+
   end
 
   private

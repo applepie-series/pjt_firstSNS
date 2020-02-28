@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-2">
+  <aside class="col-md-3">
     <section class="user_info">
       <%= link_to @user do %>
         <h1>
@@ -42,7 +42,7 @@
       </section>
     <% end %>
   </aside>
-  <div class="col-md-10 row" id="show_microposts">
+  <div class="col-md-9 row" id="show_microposts">
     <% if @microposts.any? %>
       <h3><%= @title %></h3>
       <ol class="microposts">

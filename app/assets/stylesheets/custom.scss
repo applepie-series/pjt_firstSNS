@@ -154,6 +154,7 @@ header ul {
   text-align: center;
 }
 
+.dropdown
 // 通知アイコン
 
 .notification-circle {
@@ -244,6 +245,18 @@ header ul {
   }
 }
 
+.required_form {
+  label {
+    &:after {
+      content: "*";
+    }
+  }
+}
+
+.sex_label {
+  margin-bottom: 1em;
+  padding-right: 20px;
+}
 // ログインフォーム
 .login-form {
   .form-control {
@@ -690,6 +703,13 @@ span.picture {
 // UserShow
 .follow_button_container {
   margin: 10px auto;
+}
+
+// ユーザー編集
+.user-edit_form {
+  .form-control {
+    margin-bottom: 10px;
+  }
 }
 
 // 通知

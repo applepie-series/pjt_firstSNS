@@ -11,11 +11,20 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <div class="required_form">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <%= f.label :sex, '性別', class: 'sex_label' %>
+      <%= f.radio_button :sex, :man, {checked: true} %> 男性
+      <%= f.radio_button :sex, :woman, {} %> 女性
+
+      <%= f.label :tel, "電話番号(ハイフン無し)" %>
+      <%= f.telephone_field :tel, class: 'form-control' %>
 
       <%= f.submit "アカウントを登録する", class: "btn btn-default btn-new" %>
     <% end %>

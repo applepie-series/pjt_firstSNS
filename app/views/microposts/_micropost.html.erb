@@ -46,22 +46,25 @@
     </span>
   </li>
 <!-- Modal -->
-  <div class="modal-content" id="image_modal-<%= micropost.id %>">
-    <% image_tag @micropost_image.variant(combine_options:{auto_orient: true, gravity: :center}).processed, class: "modal-content_image" %>
-    <div class="modal_micropost-comment">
-      <%= render "likes/like", micropost: micropost %>
-      <% @comments = micropost.comments %>
-      <% if @comments.any? %>
-        <% if @comments.count > 3%>
-          <% @threecomments = micropost.comments.first(3) %>
-          <%= render @threecomments %>
-          <%= link_to "...続きを読む", micropost %>
-        <% else %>
-          <%= render @comments%>
+
+  <% if micropost.image.attached? %>
+    <div class="modal-content" id="image_modal-<%= micropost.id %>">
+      <% image_tag @micropost_image.variant(combine_options:{auto_orient: true, gravity: :center}).processed, class: "modal-content_image" %>
+      <div class="modal_micropost-comment">
+        <%= render "likes/like", micropost: micropost %>
+        <% @comments = micropost.comments %>
+        <% if @comments.any? %>
+          <% if @comments.count > 3%>
+            <% @threecomments = micropost.comments.first(3) %>
+            <%= render @threecomments %>
+            <%= link_to "...続きを読む", micropost %>
+          <% else %>
+            <%= render @comments%>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <script>
