@@ -1,5 +1,5 @@
-<% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
+<% provide(:title, "ユーザー編集") %>
+<h1>ユーザー編集</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -11,6 +11,9 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :introduction %>
+      <%= f.text_area :introduction, class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
@@ -26,4 +29,29 @@
       <a href="http://gravatar.com/emails" target="_blank">change</a>
     </div>
   </div>
+</div>
+
+<%# <%= link_to 'samplemodal', modal_path, remote: true, class: "btn btn-lg, btn-primary" %>
+<div id="user-modal"></div>
+<div class="container text-center">
+  <button type="button" class="btn btn-primary mt-5">つぶやきを投稿する</button>
+</div>
+<div class="container text-center">
+  <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#post">つぶやきを投稿する</button>
+  <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>ffffffffff</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <button type="button" class="btn btn-primary">投稿する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id='btnstyle__syosai'>
+  <%= link_to "削除", @user, method: :delete, data: { confirm: "本当に削除してもよろしいですか？", cancel: 'やめる', commit: '削除する'}, title: '削除確認画面',class: "btn btn-default btn-block" %>
 </div>

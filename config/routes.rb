@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
   get 'sessions/new'
   get 'users/new'
+  get '/microposts/:id/modal', to: 'microposts#modal'
   root 'static_pages#runding'
   get    '/home',    to: 'static_pages#home'
   get    '/help',    to: 'static_pages#help'
@@ -12,9 +13,12 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+
+  get 'modal', to: 'users#modal'
+
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :likes
     end
   end
   resources :account_activations, only: [:edit]

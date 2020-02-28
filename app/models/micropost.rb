@@ -50,8 +50,12 @@ class Micropost < ApplicationRecord
 
   private
     def image_size
-      if image.attached? && image.size > 5.megabytes
-        errors.add(:image, "5MB以下の画像を選択してください")
+      if image.attached?
+        if image.byte_size > 5.megabytes
+          errors.add(:content, "5MB以下の画像を選択してください")
+        end
+      else
+        errors.add(:content, "画像を選択してください")
       end
     end
 end

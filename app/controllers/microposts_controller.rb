@@ -17,7 +17,7 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "投稿が完了しました。"
-      redirect_back(fallback_location: root_path)
+      redirect_to home_url
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
       @micropost = current_user.microposts.build(micropost_params)
@@ -31,6 +31,9 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || home_url
   end
 
+  def modal
+    @micropost = Micropost.find(params[:id])
+  end
   private
 
     def micropost_params

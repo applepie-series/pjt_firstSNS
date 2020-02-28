@@ -8,9 +8,6 @@ body {
 }
 /* universal */
 
-html, body {
-}
-
 body {
   padding-bottom: 60px;
   display: flex;
@@ -36,6 +33,9 @@ textarea {
   }
 }
 
+a {
+  text-decoration: none;
+}
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -154,6 +154,20 @@ header ul {
   text-align: center;
 }
 
+// 通知アイコン
+
+.notification-circle {
+  position: absolute;
+  padding-left: 1.3rem;
+  padding-top: 0rem;
+  top: 1rem;
+  color: rgba(243, 174, 99, 0.8);
+}
+
+.notification-container {
+  margin: 40px auto 70px;
+}
+
 // footer
 
 .footer {
@@ -240,12 +254,15 @@ header ul {
 .micropost_new {
   margin-top: 30px;
   .micropost_form {
-    textarea {
+    .form-control {
       width: 100%;
       height: 4em;
       max-width: 700px;
       border-radius: 5px;
       margin-bottom: 10px;
+    }
+    .form-image {
+      height: auto;
     }
     .file-input {
       margin-bottom: 10px;
@@ -253,6 +270,10 @@ header ul {
     img {
       max-height: 350px;
       max-width: 600px;
+    }
+    .btn {
+      margin-top: 10px;
+      margin-bottom: 30px;
     }
   }
 }
@@ -290,6 +311,29 @@ header ul {
   margin: 0;
 }
 
+// パスワード再設定
+.reset-passward_container {
+  width: 100%;
+  .reset-password {
+    .btn {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
+  .reset-passward_content {
+    border: solid 1px $border-gray;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    padding: 5px 10px;
+    text-align: center;
+    p {
+      color: rgb(92, 91, 91);
+      font-weight: 300;
+      vertical-align: middle;
+    }
+  }
+}
 
 /* Users index */
 
@@ -303,6 +347,15 @@ header ul {
   }
 }
 
+// ユーザー詳細
+#show_microposts {
+  h3 {
+    margin-left: 2em;
+    margin-bottom: 20px;
+    font-size: 1.7em;
+    font-weight: 300;
+  }
+}
 
 /* microposts */
 
@@ -326,6 +379,10 @@ header ul {
     a {
       display: table-cell;
       vertical-align: middle;
+      color: rgb(32, 27, 27);
+      &:hover {
+        color: rgb(105, 88, 88);
+      }
     }
   }
 }
@@ -483,6 +540,48 @@ header ul {
   }
 }
 
+// 投稿画像モーダル
+
+.modal-content {
+  position:fixed;
+  display:none;
+  z-index:2;
+  width:50%;
+  margin:0;
+  padding:10px 20px;
+  border:2px solid #aaa;
+  background:#fff;
+  .modal_micropost-comment {
+    margin:0;
+    padding:0;
+  }
+}
+
+.modal-overlay {
+  z-index:1;
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:120%;
+  background-color:rgba(0,0,0,0.75);
+}
+
+.modal-open:hover {
+  cursor:pointer;
+}
+
+.modal-close {
+  color:#00f;
+  text-decoration:underline;
+}
+
+.modal-close:hover {
+  cursor:pointer;
+  color:#f00;
+}
+
 
 aside {
   textarea {
@@ -507,6 +606,31 @@ span.picture {
 
 // user_info
 
+.user_info {
+  a {
+    color: rgb(32, 27, 27);
+    &:hover {
+      color: rgb(105, 88, 88);
+    }
+  }
+}
+
+.like-posts {
+  border: solid 2px $border-gray;
+  border-radius: 5px;
+  color: black;
+  font-size:1.2em;
+  max-width: 250px;
+  padding: 3px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  &:hover {
+    text-decoration: none;
+    color: rgb(110, 109, 109);
+  }
+}
+
 #user_info-name {
   font-size: 1.2em;
   font-weight: 500;
@@ -518,6 +642,24 @@ span.picture {
   }
 }
 
+.introduction {
+  border: solid 1px $border-gray;
+  border-radius: 5px;
+  margin: 10px auto;
+  text-align: center;
+  h4 {
+    padding: 2px 0;
+    font-weight: 300;
+    font-size: 0.9em;
+    border-bottom: solid 1px $border-gray;
+    text-align: center;
+    margin: 0;
+  }
+  .content {
+    font-size: 0.9em;
+    padding: 6px 0;
+  }
+}
 // フォロー一覧
 .follow_container {
   margin-top: 40px;
@@ -548,19 +690,6 @@ span.picture {
 // UserShow
 .follow_button_container {
   margin: 10px auto;
-}
-
-// 通知アイコン
-.notification-circle {
-  position: absolute;
-  padding-left: 6.3rem;
-  padding-top: 0rem;
-  top: 0.8rem;
-  color: rgba(243, 174, 99,0.8);
-}
-
-.notification-container {
-  margin: 40px auto 70px;
 }
 
 // 通知

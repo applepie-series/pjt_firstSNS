@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-4">
   <li class="micropost-container" id="micropost-<%= micropost.id %>">
     <div class="micropost_user-name">
       <%= link_to gravatar_for(micropost.user, size: 35), @user %>
@@ -14,9 +14,10 @@
           </div>
         </div>
         <% if micropost.image.attached? %>
-          <%= link_to micropost.image, 'data-lightbox': image do%>
-            <%= image_tag image.variant(combine_options:{resize:"300x300^", auto_orient: true,crop:"300x300+0+0",gravity: :center}).processed %>
-          <%end%>
+          <% @micropost_image = micropost.image %>
+          <button type="button" data-target="<%= micropost.id %>" class="modal-open">
+              <%= image_tag micropost.image.variant(combine_options:{resize:"300x300^", auto_orient: true,crop:"300x300+0+0",gravity: :center}).processed %>
+          </button>
         <% end %>
       </span>
     </div>
@@ -44,45 +45,102 @@
       <% end %>
     </span>
   </li>
+<!-- Modal -->
+  <div class="modal-content" id="image_modal-<%= micropost.id %>">
+    <% image_tag @micropost_image.variant(combine_options:{auto_orient: true, gravity: :center}).processed, class: "modal-content_image" %>
+    <div class="modal_micropost-comment">
+      <%= render "likes/like", micropost: micropost %>
+      <% @comments = micropost.comments %>
+      <% if @comments.any? %>
+        <% if @comments.count > 3%>
+          <% @threecomments = micropost.comments.first(3) %>
+          <%= render @threecomments %>
+          <%= link_to "...続きを読む", micropost %>
+        <% else %>
+          <%= render @comments%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<script>
-$('.Card-Item-Comment-Text').each(function(e){
 
-  let $comment = $(this);
-  // 元の文章を変数に格納
-  let comment = $comment.html();
-  let length = comment.length;
-  let commentShow;
-  let commentText;
-  if($comment.height() > 50){
-    // 文章の要素の高さが100を超えていたら隠す用のisHiddenクラスを付与
-    $comment.addClass('isHidden');
-    
-    // ウィンドウ幅が768px以上の時の処理（PC表示）
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 86);
-      commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
-      $comment.html(commentText);
-    } else { // ウィンドウ幅が768px以下の時の処理（スマホ表示）
-      commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 68);
-      commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
-      $comment.html(commentText);
-    }
-    // 続きを読むをクリックで元の文章を表示
-    $comment.on('click', '.Card-Item-Comment-Text-More', function(e){
-      let $anchor = $(e.currentTarget);
-      let $anchorParent = $anchor.parent();
-      $anchorParent.removeClass('isHidden');
-      $anchorParent.html(''); // 一旦空にする
-      $anchorParent.html(comment).append('<span class="Card-Item-Comment-Text-Hide">' + '閉じる' + '</span>');
-      // 閉じるをクリックで元に戻す
-      $('.Card-Item-Comment-Text-Hide').on('click', function(e){
-        let $anchorHide = $(e.currentTarget).parent();
-        $anchorHide.addClass('isHidden');
-        $anchorHide.html('');
-        $anchorHide.html(commentText);
+<script>
+  $(function(){
+    // .modal-openをクリック後
+    $('.modal-open').click(function(){
+      $('body').append('<div class="modal-overlay"></div>');
+      $('.modal-overlay').fadeIn('slow');
+
+      var modal = '#image_modal-' + $(this).attr('data-target');
+      // モーダルコンテンツの表示位置を設定
+      modalResize();
+      // モーダルコンテンツフェードイン
+      $(modal).fadeIn('slow');
+
+      // .modal-overlayもしくは.modal-closeをクリックでモーダル削除
+      $('.modal-overlay, .modal-close').off().click(function(){
+          $(modal).fadeOut('slow');
+          $('.modal-overlay').fadeOut('slow',function(){
+              $('.modal-overlay').remove();
+          });
       });
+
+      // リサイズしたら表示位置を再取得
+      $(window).on('resize', function(){
+          modalResize();
+      });
+
+      // モーダルコンテンツの表示位置
+      function modalResize(){
+          var w = $(window).width();
+          var h = $(window).height();
+
+          var x = (w - $(modal).outerWidth(true)) / 2;
+          var y = (h - $(modal).outerHeight(true)) / 2;
+
+          $(modal).css({'left': x + 'px','top': y + 'px'});
+      }
     });
-  }
+  });
+</script>
+<script>
+// コンテントの続きを読む機能
+  $('.Card-Item-Comment-Text').each(function(e){
+    let $comment = $(this);
+    // 元の文章を変数に格納
+    let comment = $comment.html();
+    let length = comment.length;
+    let commentShow;
+    let commentText;
+    if($comment.height() > 50){
+      // 文章の要素の高さが100を超えていたら隠す用のisHiddenクラスを付与
+      $comment.addClass('isHidden');
+      
+      // ウィンドウ幅が768px以上の時の処理（PC表示）
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 86);
+        commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
+        $comment.html(commentText);
+      } else { // ウィンドウ幅が768px以下の時の処理（スマホ表示）
+        commentShow = comment.replace(/<br>/g, "\u00a0").substring(0, 68);
+        commentText = commentShow += '<span class="Card-Item-Comment-Text-More">' + '...続きを読む' + '</span>';
+        $comment.html(commentText);
+      }
+      // 続きを読むをクリックで元の文章を表示
+      $comment.on('click', '.Card-Item-Comment-Text-More', function(e){
+        let $anchor = $(e.currentTarget);
+        let $anchorParent = $anchor.parent();
+        $anchorParent.removeClass('isHidden');
+        $anchorParent.html(''); // 一旦空にする
+        $anchorParent.html(comment).append('<span class="Card-Item-Comment-Text-Hide">' + '閉じる' + '</span>');
+        // 閉じるをクリックで元に戻す
+        $('.Card-Item-Comment-Text-Hide').on('click', function(e){
+          let $anchorHide = $(e.currentTarget).parent();
+          $anchorHide.addClass('isHidden');
+          $anchorHide.html('');
+          $anchorHide.html(commentText);
+        });
+      });
+    }
   });
 </script>

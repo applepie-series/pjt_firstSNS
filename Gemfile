@@ -8,6 +8,7 @@ gem 'bcrypt', '3.1.12'
 gem 'faker',   '1.7.3'
 gem 'image_processing', '~> 1.2'
 gem 'bootstrap-sass'
+gem 'jquery-rails'
 gem "aws-sdk-s3", require: false
 gem 'counter_culture'
 gem 'will_paginate'
@@ -18,7 +19,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', require: false
 gem 'uglifier',  '~> 3.2'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'rails-i18n'

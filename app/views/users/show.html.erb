@@ -2,10 +2,12 @@
 <div class="row">
   <aside class="col-md-2">
     <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+      <%= link_to @user do %>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      <% end %>
       <div class="follow_button_container">
         <%= render 'follow_form' if logged_in? %>
       </div>
@@ -28,14 +30,27 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+    <% if current_user?(@user)%>
+        <a href="<%= likes_user_path(@user) %>" class="like-posts">お気に入り</a>
+    <% end %>
+    <% if @user.introduction.present? %>
+      <section class="introduction">
+        <h4>プロフィール</h4>
+        <div class="content">
+          <%= @user.introduction %>
+        </div>
+      </section>
+    <% end %>
   </aside>
-  <div class="col-md-10 row">
-    <% if @user.microposts.any? %>
-      <h3><%= @user.name %>の投稿 (<%= @user.microposts.count %>)</h3>
+  <div class="col-md-10 row" id="show_microposts">
+    <% if @microposts.any? %>
+      <h3><%= @title %></h3>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
       <%= will_paginate @microposts %>
+    <% else %>
+      <h3>投稿はありません</h3>
     <% end %>
   </div>
 </div>

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :micropost
   has_many :comments, dependent: :destroy
   has_many :active_notifications, class_name: "Notification",
                                  foreign_key: "visitor_id",
@@ -108,6 +109,7 @@ class User < ApplicationRecord
   def self.search(search)
     where(['name LIKE ?', "%#{search}%"])
   end
+
 
   private
 

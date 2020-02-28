@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @title = "#{@user.name}の投稿 #{@user.microposts.count}"
     # ダイレクトメッセージリンク
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
@@ -84,11 +85,39 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def likes
+    @title = "お気に入り一覧"
+    @microposts = current_user.like_posts.paginate(page: params[:page])
+    @user  = User.find(params[:id])
+    # ダイレクトメッセージリンク
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @RoomPresent = Room.find(cu.room_id)
+          end
+        end
+      end
+    end
+    unless @isRoom
+      @room = Room.new
+      @entry = Entry.new
+    end
+    render 'show'
+  end
+
+  def modal
+    
+  end
+
   private
 
     def user_params
       params.require(:user).permit(
-        :name, :email, :password, 
+        :name, :email, :introduction, :password, 
         :password_confirmation)
     end
 
