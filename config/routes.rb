@@ -14,11 +14,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  get 'modal', to: 'users#modal'
-
   resources :users do
     member do
-      get :following, :followers, :likes
+      get :following, :followers, :likes, :reset
     end
   end
   resources :account_activations, only: [:edit]

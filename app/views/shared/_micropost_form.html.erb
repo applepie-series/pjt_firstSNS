@@ -4,7 +4,7 @@
     <%= f.text_area :content, class: 'form-control', placeholder: "投稿内容を入力する..." %>
   </div>
     <div class="field">
-      <%= f.file_field :image, class: 'form-control form-image', accept: 'image/jpeg,image/jpg,image/bmp,image/gif,image/png'%>
+      <%= f.file_field :image, class: 'form-control form-image', accept: 'image/jpeg,image/png'%>
     </div>
   <%= f.submit "投稿", class: "btn btn-default btn-lg" %>
 <% end %>

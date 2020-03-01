@@ -1,0 +1,39 @@
+<script>
+  $(function(){
+    // .modal-openをクリック後
+    $('.modal-open').click(function(){
+      $('body').append('<div class="modal-overlay"></div>');
+      $('.modal-overlay').fadeIn('slow');
+
+      var modal = '#image_modal-' + $(this).attr('data-target');
+      // モーダルコンテンツの表示位置を設定
+      modalResize();
+      // モーダルコンテンツフェードイン
+      $(modal).fadeIn('slow');
+
+      // .modal-overlayもしくは.modal-closeをクリックでモーダル削除
+      $('.modal-overlay, .modal-close').off().click(function(){
+          $(modal).fadeOut('slow');
+          $('.modal-overlay').fadeOut('slow',function(){
+              $('.modal-overlay').remove();
+          });
+      });
+
+      // リサイズしたら表示位置を再取得
+      $(window).on('resize', function(){
+          modalResize();
+      });
+
+      // モーダルコンテンツの表示位置
+      function modalResize(){
+          var w = $(window).width();
+          var h = $(window).height();
+
+          var x = (w - $(modal).outerWidth(true)) / 2;
+          var y = (h - $(modal).outerHeight(true)) / 2;
+
+          $(modal).css({'left': x + 'px','top': (y) + 'px'});
+      }
+    });
+  });
+</script>

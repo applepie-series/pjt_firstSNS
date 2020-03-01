@@ -30,10 +30,6 @@ class MicropostsController < ApplicationController
     flash[:success] = "投稿を削除しました。"
     redirect_to request.referrer || home_url
   end
-
-  def modal
-    @micropost = Micropost.find(params[:id])
-  end
   private
 
     def micropost_params

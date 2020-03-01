@@ -11,6 +11,9 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
+      <%= f.label :username %>
+      <%= f.text_field :username, class: 'form-control' %>
+
       <div class="required_form">
         <%= f.label :password %>
         <%= f.password_field :password, class: 'form-control' %>
@@ -23,10 +26,15 @@
       <%= f.radio_button :sex, :man, {checked: true} %> 男性
       <%= f.radio_button :sex, :woman, {} %> 女性
 
-      <%= f.label :tel, "電話番号(ハイフン無し)" %>
+      <%= f.label :tel, "電話番号(ハイフン無し)", class: 'tel_label' %>
       <%= f.telephone_field :tel, class: 'form-control' %>
-
+      <div class="terms_button">
+        <button type="button" data-target="terms" class="modal-open">利用規約</button>
+      </div>
       <%= f.submit "アカウントを登録する", class: "btn btn-default btn-new" %>
     <% end %>
   </div>
 </div>
+
+<%= render "users/terms" %>
+<%= render "microposts/modalscript" %>

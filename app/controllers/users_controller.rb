@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update, :reset]
   before_action :admin_user,     only: :destroy
 
   def index
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    @title = "#{@user.name}の投稿 #{@user.microposts.count}"
+    @title = "#{@user.username}の投稿 #{@user.microposts.count}"
     # ダイレクトメッセージリンク
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
@@ -53,15 +53,27 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @title = "ユーザー編集"
   end
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = "プロフィールを更新しました。"
-      redirect_to @user
+    if params[:user][:nowpassword].blank?
+      if @user.update_attributes(user_params)
+        flash[:success] = "プロフィールを更新しました。"
+        redirect_to @user
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      if @user.authenticate(params[:user][:nowpassword])
+        @user.update_attributes(password_params)
+        flash[:success] = "パスワードを更新しました。"
+        redirect_to @user
+      else
+        flash.now[:danger] = '更新に失敗しました。パスワードの内容を確認し再度入力して下さい。'
+        render 'reset'
+      end
     end
   end
 
@@ -109,16 +121,19 @@ class UsersController < ApplicationController
     render 'show'
   end
 
-  def modal
-
+  def reset
+    @title = "パスワード再設定"
+    @user = User.find(params[:id])
   end
 
   private
 
+    def password_params
+      params.require(:user).permit(:password, :password_confirmation)
+    end
     def user_params
       params.require(:user).permit(
-        :name, :email, :introduction, :password, 
-        :password_confirmation)
+        :name, :email, :introduction, :web, :tel, :username, :sex, :password, :password_confirmation)
     end
 
     # beforeアクション

@@ -14,9 +14,8 @@
           </div>
         </div>
         <% if micropost.image.attached? %>
-          <% @micropost_image = micropost.image %>
           <button type="button" data-target="<%= micropost.id %>" class="modal-open">
-              <%= image_tag micropost.image.variant(combine_options:{resize:"300x300^", auto_orient: true,crop:"300x300+0+0",gravity: :center}).processed %>
+            <%= image_tag micropost.image.variant(combine_options:{resize:"300x300^", auto_orient: true,crop:"300x300+0+0",gravity: :center}).processed %>
           </button>
         <% end %>
       </span>
@@ -45,67 +44,11 @@
       <% end %>
     </span>
   </li>
-<!-- Modal -->
-
-  <% if micropost.image.attached? %>
-    <div class="modal-content" id="image_modal-<%= micropost.id %>">
-      <% image_tag @micropost_image.variant(combine_options:{auto_orient: true, gravity: :center}).processed, class: "modal-content_image" %>
-      <div class="modal_micropost-comment">
-        <%= render "likes/like", micropost: micropost %>
-        <% @comments = micropost.comments %>
-        <% if @comments.any? %>
-          <% if @comments.count > 3%>
-            <% @threecomments = micropost.comments.first(3) %>
-            <%= render @threecomments %>
-            <%= link_to "...続きを読む", micropost %>
-          <% else %>
-            <%= render @comments%>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
 </div>
+<!-- Modal -->
+<%= render "microposts/modal", micropost: micropost %>  
+<%= render "microposts/modalscript" %>
 
-<script>
-  $(function(){
-    // .modal-openをクリック後
-    $('.modal-open').click(function(){
-      $('body').append('<div class="modal-overlay"></div>');
-      $('.modal-overlay').fadeIn('slow');
-
-      var modal = '#image_modal-' + $(this).attr('data-target');
-      // モーダルコンテンツの表示位置を設定
-      modalResize();
-      // モーダルコンテンツフェードイン
-      $(modal).fadeIn('slow');
-
-      // .modal-overlayもしくは.modal-closeをクリックでモーダル削除
-      $('.modal-overlay, .modal-close').off().click(function(){
-          $(modal).fadeOut('slow');
-          $('.modal-overlay').fadeOut('slow',function(){
-              $('.modal-overlay').remove();
-          });
-      });
-
-      // リサイズしたら表示位置を再取得
-      $(window).on('resize', function(){
-          modalResize();
-      });
-
-      // モーダルコンテンツの表示位置
-      function modalResize(){
-          var w = $(window).width();
-          var h = $(window).height();
-
-          var x = (w - $(modal).outerWidth(true)) / 2;
-          var y = (h - $(modal).outerHeight(true)) / 2;
-
-          $(modal).css({'left': x + 'px','top': y + 'px'});
-      }
-    });
-  });
-</script>
 <script>
 // コンテントの続きを読む機能
   $('.Card-Item-Comment-Text').each(function(e){

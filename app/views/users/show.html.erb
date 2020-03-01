@@ -1,11 +1,11 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.username) %>
 <div class="row">
   <aside class="col-md-3">
     <section class="user_info">
       <%= link_to @user do %>
         <h1>
           <%= gravatar_for @user %>
-          <%= @user.name %>
+          <%= @user.username %>
         </h1>
       <% end %>
       <div class="follow_button_container">
@@ -15,32 +15,44 @@
       <% unless @user.id == current_user.id %>
         <% if current_user.following?(@user) && @user.following?(current_user) %>
         <% if @isRoom == true %>
-          <p class="user-show-room"><%= link_to "メッセージを送る", @RoomPresent, class: "btn btn-primary btn-lg" %>
+          <%= link_to "メッセージを送る", @RoomPresent, class: "btn btn-default btn-sm" %>
         <% else %>
           <%= form_for @room do |f| %>
             <%= fields_for @entry do |e| %>
               <%= e.hidden_field :user_id, value: @user.id %>
             <% end %>
-            <%= f.submit "メッセージを送る", class: "btn btn-primary btn-md user-show-chat" %>
+            <%= f.submit "メッセージを送る", class: "btn btn-default btn-sm" %>
           <% end %>
         <% end %>
         <% end %>
       <% end %>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
     </section>
     <% if current_user?(@user)%>
-        <a href="<%= likes_user_path(@user) %>" class="like-posts">お気に入り</a>
+      <a href="<%= likes_user_path(@user) %>" class="like-posts">お気に入り</a>
     <% end %>
-    <% if @user.introduction.present? %>
-      <section class="introduction">
+    <section class="introduction">
+      <div class="introduction-content">
+        <h4>名前</h4>
+        <div class="content">
+          <%= @user.name %>
+        </div>
+      </div>
+      <div class="introduction-content">
+        <h4>WEBサイト</h4>
+        <div class="content">
+          <%= @user.web == nil ? "-" : @user.web %>
+        </div>
+      </div>
+      <div class="introduction-content">
         <h4>プロフィール</h4>
         <div class="content">
-          <%= @user.introduction %>
+          <%= @user.introduction == nil ? "-" : @user.introduction %>
         </div>
-      </section>
-    <% end %>
+      </div>
+    </section>
   </aside>
   <div class="col-md-9 row" id="show_microposts">
     <% if @microposts.any? %>

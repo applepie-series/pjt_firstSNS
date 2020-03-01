@@ -19,12 +19,10 @@
       <div class="micropost-content micropost_show-content">
         <%= @micropost.content %>
       </div>
-      <% if @micropost.images.attached? %>
-        <% @micropost.images.each do |image| %>
-          <%= link_to image, 'data-lightbox': image do%>
-            <%= image_tag image.variant(combine_options:{resize:"500x500^", auto_orient: true,crop:"500x500+0+0",gravity: :center}).processed %>
-          <%end%>
-        <%end%>
+      <% if @micropost.image.attached? %>
+        <button type="button" data-target="<%= @micropost.id %>" class="modal-open">
+          <%= image_tag @micropost.image.variant(combine_options:{resize:"500x500^", auto_orient: true,crop:"500x500+0+0",gravity: :center}).processed %>
+        </button>
       <% end %>
     </div>
     <div class="comment_container">
@@ -46,3 +44,6 @@
     </span>
   </div>
 </div>
+<!-- Modal -->
+<%= render "microposts/modal", micropost: @micropost %>
+<%= render "microposts/modalscript" %>
