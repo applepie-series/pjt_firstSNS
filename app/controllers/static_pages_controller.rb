@@ -24,6 +24,8 @@ class StaticPagesController < ApplicationController
   end
 
   def runding
-    
+  end
+
+  def terms
   end
 end

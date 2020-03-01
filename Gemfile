@@ -24,6 +24,9 @@ gem 'uglifier',  '~> 3.2'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'rails-i18n'
 gem 'mini_magick'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
