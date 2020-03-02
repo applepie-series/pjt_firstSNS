@@ -27,6 +27,7 @@ gem 'mini_magick'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'config'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'

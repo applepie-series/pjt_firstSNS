@@ -4,7 +4,7 @@
       <%= link_to "InstaClone", home_path, id: "logo" %>
       <%= render 'layouts/search_form'%>
       <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <li><%= link_to "投稿", new_micropost_path, id: "nav-list" %></li>
           <li><%= link_to "ユーザー一覧", users_path, id: "nav-list" %></li>
           <li class="notification"><%= link_to '通知', notifications_path, id: "nav-list" %>
@@ -21,12 +21,13 @@
               <li><%= link_to "プロフィール設定", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "ログアウト", logout_path, method: :delete %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "ログイン", login_path, id: "nav-list" %></li>
+          <li><%= link_to "ログイン", new_user_session_path, id: "nav-list" %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, id: "nav-list" %></li>
         <% end %>
       </ul>
     </nav>
