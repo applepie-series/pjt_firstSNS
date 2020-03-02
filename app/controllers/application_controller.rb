@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
 
   # ログイン後実行されるdeviseメソッド
   def after_sign_in_path_for(resource) 
-    user = User.find_by(email: params[:session][:email].downcase)
-    redirect_to user
+    user_path(resource)
   end
   protected
     def configure_permitted_parameters

@@ -10,7 +10,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  attr_accessor :remember_token, :activation_token, :reset_token
+  # attr_accessor :remember_token, :activation_token, :reset_token
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :micropost
   has_many :comments, dependent: :destroy
@@ -35,35 +35,38 @@ class User < ApplicationRecord
 
   enum sex: { man: 0, woman: 1 }
 
-  # 渡された文字列のハッシュ値を返す
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-    BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
+  def remember_me!
+    true
   end
+  # 渡された文字列のハッシュ値を返す
+  # def User.digest(string)
+  #   cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+  #   BCrypt::Engine.cost
+  #   BCrypt::Password.create(string, cost: cost)
+  # end
 
   # ランダムなトークンを返す
-  def User.new_token
-    SecureRandom.urlsafe_base64
-  end
+  # def User.new_token
+  #   SecureRandom.urlsafe_base64
+  # end
 
   # 永続セッションのためにユーザーをデータベースに記憶する
-  def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
-  end
+  # def remember
+  #   self.remember_token = User.new_token
+  #   update_attribute(:remember_digest, User.digest(remember_token))
+  # end
 
   # 渡されたトークンがダイジェストと一致したらtrueを返す
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
-  end
+  # def authenticated?(attribute, token)
+  #   digest = send("#{attribute}_digest")
+  #   return false if digest.nil?
+  #   BCrypt::Password.new(digest).is_password?(token)
+  # end
 
   # ユーザーのログイン情報を破棄する
-  def forget
-    update_attribute(:remember_digest, nil)
-  end
+  # def forget
+  #   update_attribute(:remember_digest, nil)
+  # end
 
   # アカウントを有効にする
   def activate

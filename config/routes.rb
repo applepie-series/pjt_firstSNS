@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {   registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations'}
+  root 'static_pages#runding'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'sessions/new'
   get 'users/new'
   get '/microposts/:id/modal', to: 'microposts#modal'
-  root 'static_pages#runding'
   get    '/home',    to: 'static_pages#home'
   get    '/help',    to: 'static_pages#help'
   get    '/about',   to: 'static_pages#about'
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-
+  
   resources :users do
     member do
       get :following, :followers, :likes, :reset

@@ -25,6 +25,8 @@ class Devise::ConfirmationsController < DeviseController
 
     if resource.errors.empty?
       set_flash_message!(:notice, :confirmed)
+      @user = User.find_by(id: resource.id)
+      sign_in @user
       respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
     else
       respond_with_navigational(resource.errors, status: :unprocessable_entity){ render :new }

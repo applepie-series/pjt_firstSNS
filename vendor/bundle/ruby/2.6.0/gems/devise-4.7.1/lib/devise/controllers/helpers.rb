@@ -174,12 +174,12 @@ module Devise
 
         context = router_name ? send(router_name) : self
 
-        if context.respond_to?(home_path, true)
+        if @user.present?
+          user_path(@user)
+        elsif context.respond_to?(home_path, true)
           context.send(home_path)
         elsif context.respond_to?(:root_path)
           context.root_path
-        elsif respond_to?(:root_path)
-          root_path
         else
           "/"
         end
