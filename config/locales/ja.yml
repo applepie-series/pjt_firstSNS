@@ -8,12 +8,12 @@ ja:
         id: ID
         name: 名前*
         email: メールアドレス*
-        username: ユーザーネーム*
+        username: ユーザーネーム
         tel: 電話番号
         sex: 性別
         introduction: 自己紹介文
         web: webアドレス
-        password: パスワード(八文字以上)
+        password: パスワード
         password_confirmation: パスワード確認
         remember_me: ログインを記憶
       admin:

@@ -497,7 +497,7 @@ module Devise
     # To calculate real characters, we must perform this operation.
     # See SecureRandom.urlsafe_base64
     rlength = (length * 3) / 4
-    SecureRandom.urlsafe_base64(rlength).tr('lIO0', 'sxyz')
+    SecureRandom.tr('lIO0', 'sxyz')
   end
 
   # constant-time comparison algorithm to prevent timing attacks

@@ -27,10 +27,11 @@ class User < ApplicationRecord
   # before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }, allow_nil: true
 
 
   enum sex: { man: 0, woman: 1 }
