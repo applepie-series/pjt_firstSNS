@@ -2,7 +2,7 @@
   <li class="micropost-container" id="micropost-<%= micropost.id %>">
     <div class="micropost_user-name">
       <%= link_to gravatar_for(micropost.user, size: 35), @user %>
-      <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+      <span class="user"><%= link_to micropost.user.user_name, micropost.user %></span>
     </div>
     <div class="micropost-content_container">
       <span class="content Card">

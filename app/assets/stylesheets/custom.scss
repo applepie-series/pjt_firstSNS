@@ -373,12 +373,15 @@ header ul {
 
 // ユーザー詳細
 
-#show_microposts {
+.show_microposts-title {
+  margin-left: 4em;
+  margin-bottom: 2em;
   h3 {
-    margin-left: 2.3em;
-    margin-bottom: 20px;
-    font-size: 1.7em;
+    border-bottom: solid 1px $border-gray;
+    display: inline;
+    font-size: 1.5em;
     font-weight: 300;
+    padding-bottom: 0.2em;
   }
 }
 
@@ -663,7 +666,7 @@ span.picture {
 }
 
 
-.like-posts {
+.user-side_button {
   border: solid 2px $border-gray;
   border-radius: 5px;
   color: black;
@@ -737,6 +740,11 @@ span.picture {
   }
   margin-top: 15px;
   text-align: center;
+}
+#user-edit_inner {
+  .user-side_button {
+    margin-bottom: 0.5em;
+  }
 }
 .user-edit_form {
   .form-control {

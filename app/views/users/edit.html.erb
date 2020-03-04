@@ -2,11 +2,13 @@
 <h1><%= @title %></h1>
 
 <div class="row">
-  <div class="col-md-2 col-md-offset-2">
-    <%= link_to "プロフィール設定", edit_user_path(current_user) %>
-    <%= link_to "パスワード再設定", reset_user_path(current_user) %>
-  </div>
-  <div class="col-md-6 user-edit_form">
+  <% if @user.uid.blank? %>
+    <div id="user-edit_inner" class="col-md-2 col-md-offset-2">
+        <%= link_to "ユーザー設定", edit_user_path(current_user), class: "user-side_button" %>
+        <%= link_to "パスワード再設定", reset_user_path(current_user), class: "user-side_button" %>
+    </div>
+  <% end %>
+  <div id="user-edit_form" class="col-md-6">
     <div class="gravatar_edit">
       <%= gravatar_for @user %>
       <a href="http://gravatar.com/emails" target="_blank">変更する</a>
@@ -36,3 +38,15 @@
     <%= link_to "アカウントを削除", @user, method: :delete, data: { confirm: "本当に削除してもよろしいですか？", cancel: 'やめる', commit: '削除する'}, title: '削除確認画面',class: "btn btn-danger btn-sm" %>
   </div>
 </div>
+
+<script>
+$(function(){
+  if($(<%= @user.uid.present? %>)){
+    $("#user-edit_inner").removeClass("col-md-offset-2")
+    $("#user-edit_form").addClass("col-md-offset-3")
+  }else{
+    $("#user-edit_inner").addClass("col-md-offset-2")
+    $("#user-edit_form").removeClass("col-md-offset-3")
+  }
+});
+</script>

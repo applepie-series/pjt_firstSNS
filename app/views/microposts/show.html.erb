@@ -13,7 +13,7 @@
   <div class="col-md-6 micropost-container">
     <div class="micropost_user-name">
       <%= link_to gravatar_for(@user, size: 35), @user %>
-      <span class="user"><%= link_to @user.name, @user %></span>
+      <span class="user"><%= link_to user_name, @user %></span>
     </div>
     <div class="micropost-content_container">
       <div class="micropost-content micropost_show-content">

@@ -5,7 +5,7 @@
       <%= link_to @user do %>
         <h1>
           <%= gravatar_for @user %>
-          <%= @user.username %>
+          <%= @user.user_name %>
         </h1>
       <% end %>
       <div class="follow_button_container">
@@ -31,7 +31,7 @@
       </section>
     </section>
     <% if current_user?(@user)%>
-      <a href="<%= likes_user_path(@user) %>" class="like-posts">お気に入り</a>
+      <a href="<%= likes_user_path(@user) %>" class="user-side_button">お気に入り</a>
     <% end %>
     <section class="introduction">
       <div class="introduction-content">
@@ -56,7 +56,9 @@
   </aside>
   <div class="col-md-9 row" id="show_microposts">
     <% if @microposts.any? %>
-      <h3><%= @title %></h3>
+      <div class="show_microposts-title">
+        <h3><%= @title %></h3>
+      </div>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>

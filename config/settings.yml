@@ -1,3 +1,6 @@
 gmail:
   user_name: 'applepie.series+sample@gmail.com'
   password: '10311mashi'
+omniauth_facebock:
+  id: '517795588855087'
+  pass: '26b36d630d27d38f4ed0e69b268786b8'

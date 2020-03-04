@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    @title = "#{@user.username}の投稿 #{@user.microposts.count}"
+    @title = "#{@user.user_name}の投稿 #{@user.microposts.count}"
     # ダイレクトメッセージリンク
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
@@ -40,16 +40,16 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      @user.send_activation_email
-      flash[:info] = "登録されたメールアドレスにメールを送りました。メールの内容を確認しアカウントを有効にしてください。"
-      redirect_to home_url
-    else
-      render 'new'
-    end
-  end
+  # def create
+  #   @user = User.new(user_params)
+  #   if @user.save
+  #     @user.send_activation_email
+  #     flash[:info] = "登録されたメールアドレスにメールを送りました。メールの内容を確認しアカウントを有効にしてください。"
+  #     redirect_to home_url
+  #   else
+  #     render 'new'
+  #   end
+  # end
 
   def edit
     @user = User.find(params[:id])

@@ -1,4 +1,4 @@
 <% @user ||= current_user %>
 <%= link_to gravatar_for(@user, size: 50), @user %>
-<%= link_to @user.username, @user, id: "user_info-name" %>
+<%= link_to @user.user_name, @user, id: "user_info-name" %>
 <span><%= pluralize(@user.microposts.count, "投稿") %></span>
