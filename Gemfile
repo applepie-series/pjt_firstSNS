@@ -14,7 +14,7 @@ gem 'counter_culture'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
-gem 'puma', '~> 4.1'
+gem 'puma'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
