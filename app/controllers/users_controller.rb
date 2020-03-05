@@ -39,18 +39,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-
-  # def create
-  #   @user = User.new(user_params)
-  #   if @user.save
-  #     @user.send_activation_email
-  #     flash[:info] = "登録されたメールアドレスにメールを送りました。メールの内容を確認しアカウントを有効にしてください。"
-  #     redirect_to home_url
-  #   else
-  #     render 'new'
-  #   end
-  # end
-
+  
   def edit
     @user = User.find(params[:id])
     @title = "ユーザー編集"
