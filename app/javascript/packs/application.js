@@ -4,12 +4,14 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+// ↓要らない…？
 // require("@rails-ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
-require('jquery3')
-require('bootstrap/dist/js/bootstrap.min.js')
+// require("turbolinks").start()
+// require("@rails/activestorage").start()
+// require("channels")
+// require('jquery3')
+// require('bootstrap/dist/js/bootstrap.min.js')
+
 import 'bootstrap'
 import 'pjt_firstSNS/app/assets/stylesheets/custom.scss'
 //= require_tree .
