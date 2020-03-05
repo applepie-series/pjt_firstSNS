@@ -27,7 +27,7 @@ import 'pjt_firstSNS/app/assets/stylesheets/custom.scss'
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("trix")
-require("@rails/actiontext")
+// require("trix")
+// require("@rails/actiontext")
 import Rails from 'rails-ujs';
 Rails.start();
