@@ -14,7 +14,6 @@ test:
   database: db/test.sqlite3
   
 production:
-  <<: *default
   adapter: postgresql
   # heroku addons:create heroku-postgresql:hobby-devのurl
   url: <%= ENV['DATABASE_URL'] %> 
