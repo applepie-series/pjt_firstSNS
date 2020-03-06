@@ -30,7 +30,7 @@ gem 'omniauth-facebook'
 gem 'config'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '1.4.2'
   gem 'byebug',  '9.0.6', platform: :mri
 end
 
@@ -51,7 +51,7 @@ group :test do
 end
 
 group :production do
-  gem 'mysql2', '>= 0.4.4'
+  gem 'pg', '>= 0.4.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

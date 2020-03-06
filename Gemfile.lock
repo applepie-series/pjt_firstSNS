@@ -215,7 +215,6 @@ GEM
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    mysql2 (0.5.3)
     nenv (0.3.0)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -238,6 +237,7 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
+    pg (1.2.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -369,9 +369,9 @@ DEPENDENCIES
   mini_magick
   minitest (= 5.13.0)
   minitest-reporters (= 1.1.14)
-  mysql2 (>= 0.4.4)
   omniauth
   omniauth-facebook
+  pg (>= 0.4.4)
   pry-rails
   puma
   rails (~> 6.0.2, >= 6.0.2.1)
@@ -380,7 +380,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
-  sqlite3 (~> 1.4)
+  sqlite3 (= 1.4.2)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (~> 3.2)
