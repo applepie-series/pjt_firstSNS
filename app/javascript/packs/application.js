@@ -13,7 +13,7 @@
 // require('bootstrap/dist/js/bootstrap.min.js')
 
 import 'bootstrap'
-import './pjt_firstSNS/app/assets/stylesheets/custom.scss'
+import './app/javascript/packs/pjt_firstSNS/app/assets/stylesheets/custom.scss'
 //= require_tree .
 //= require jquery3
 //= require popper
