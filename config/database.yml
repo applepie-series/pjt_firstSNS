@@ -16,5 +16,7 @@ test:
 production:
   <<: *default
   adapter: postgresql
+  # heroku addons:create heroku-postgresql:hobby-devのurl
+  url: <%= ENV['DATABASE_URL'] %> 
   database: pjt_firstsns_production
   encoding: utf8
