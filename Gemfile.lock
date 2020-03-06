@@ -63,7 +63,7 @@ GEM
     autoprefixer-rails (9.7.4)
       execjs
     aws-eventstream (1.0.3)
-    aws-partitions (1.279.0)
+    aws-partitions (1.280.0)
     aws-sdk-core (3.90.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -371,7 +371,7 @@ DEPENDENCIES
   minitest-reporters (= 1.1.14)
   omniauth
   omniauth-facebook
-  pg (>= 0.4.4)
+  pg
   pry-rails
   puma
   rails (~> 6.0.2, >= 6.0.2.1)
