@@ -18,7 +18,8 @@ module.exports = {
     filename: 'backend.js'
   },
   externals: nodeModules
-  resolve: {
-    modules: ['node_modules']
-  }
+  // 以下を追加した状態でも試してもエラーが発生
+  // resolve: {
+  //   modules: ['node_modules']
+  // }
 }
