@@ -18,4 +18,7 @@ module.exports = {
     filename: 'backend.js'
   },
   externals: nodeModules
+  resolve: {
+    modules: ['node_modules']
+  }
 }
