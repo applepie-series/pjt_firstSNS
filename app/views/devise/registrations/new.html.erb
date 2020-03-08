@@ -1,0 +1,56 @@
+<% provide(:title, "新規登録") %>
+<h2>新規登録</h2>
+
+<div class="user_new row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="required_form">
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(8文字以上・半角英数字)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= f.label :sex, '性別', class: 'sex_label' %>
+      <%= f.radio_button :sex, :man, {checked: true} %> 男性
+      <%= f.radio_button :sex, :woman, {} %> 女性
+
+      <%= f.label :tel, "電話番号(ハイフン無し)", class: 'tel_label' %>
+      <%= f.telephone_field :tel, class: 'form-control' %>
+      
+      <div class="terms_button">
+        <%= link_to "利用規約", terms_path %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "登録", class: "btn btn-default btn-new" %>
+      </div>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<p><%= @email %>様、InstaCloneへようこそ。</p>
+
+<p>以下のリンクにアクセスして下さい。</p>
+<p>アカウントが有効となり、ユーザーアカウントの本登録が完了致します。</p>
+
+<p><%= link_to 'アカウントを有効にする', confirmation_url(@resource, confirmation_token: @token) %></p>
