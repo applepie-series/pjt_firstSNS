@@ -1,0 +1,13 @@
+<% provide(:title, 'ユーザー一覧') %>
+<h1>ユーザー一覧</h1>
+<%= render "search_form"%>
+<% if @search.present? %>
+    <%= link_to "全てのユーザーを表示", users_path %>
+<% end %>
+<%= will_paginate %>
+
+<ul class="users">
+    <%= render @users %>
+</ul>
+
+<%= will_paginate %>

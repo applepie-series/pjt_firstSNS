@@ -1,0 +1,17 @@
+<% if micropost.image.attached? %>
+  <div class="modal-content" id="image_modal-<%= micropost.id %>">
+    <%= image_tag micropost.image.variant(combine_options:{auto_orient: true, gravity: :center}).processed, class: "modal-content_image" %>
+    <div class="modal_micropost-comment">
+      <% @comments = micropost.comments %>
+      <% if @comments.any? %>
+        <% if @comments.count > 3%>
+          <% @threecomments = micropost.comments.first(3) %>
+          <%= render @threecomments %>
+          <%= link_to "...続きを読む", micropost %>
+        <% else %>
+          <%= render @comments%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

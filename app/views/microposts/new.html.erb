@@ -1,0 +1,17 @@
+<% provide(:title, "投稿") %>
+<h1>投稿</h1>
+<div class="row micropost_new">
+  <div class="col-md-2 col-md-offset-1">
+    <section class="user_info">
+      <%= render 'shared/user_info' %>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+  </div>
+  <div class="col-md-8">
+    <section class="micropost_form">
+      <%= render 'shared/micropost_form' %>
+    </section>
+  </div>
+</div>
