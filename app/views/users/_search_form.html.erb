@@ -1,6 +1,0 @@
-<div class="col search navbar-nav navbar-right users_search-form">
-  <%= form_tag(users_path,:method => 'get') do %>
-    <%= text_field_tag :search, '', class: 'form-control search-form',id: 'search-form', placeholder: 'ユーザーを検索...' %>
-    <%= submit_tag "\uf002", class: 'btn btn-default font-awesome-form', :name => nil %>
-  <% end %>
-</div>
